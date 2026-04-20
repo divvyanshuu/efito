@@ -1,65 +1,189 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import ProductCard from "../components/shop/ProductCard";
+import { Product } from "@/types";
+
+// Placeholder products - will come from database later
+const featuredProducts: Product[] = [
+  {
+    id: "1",
+    name: "Performance Tank",
+    slug: "performance-tank",
+    description: "Breathable mesh fabric",
+    price: 149900,
+    comparePrice: 199900,
+    images: [],
+    category: { id: "1", name: "Tops", slug: "tops" },
+    sizes: ["S", "M", "L", "XL"],
+    colors: [{ name: "Black", hex: "#000000" }],
+    stock: 50,
+    featured: true,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: "2",
+    name: "Training Shorts",
+    slug: "training-shorts",
+    description: "4-way stretch fabric",
+    price: 179900,
+    images: [],
+    category: { id: "2", name: "Bottoms", slug: "bottoms" },
+    sizes: ["S", "M", "L", "XL"],
+    colors: [{ name: "Navy", hex: "#1e293b" }],
+    stock: 30,
+    featured: true,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: "3",
+    name: "Compression Tee",
+    slug: "compression-tee",
+    description: "Moisture-wicking tech",
+    price: 169900,
+    comparePrice: 219900,
+    images: [],
+    category: { id: "1", name: "Tops", slug: "tops" },
+    sizes: ["S", "M", "L", "XL"],
+    colors: [{ name: "White", hex: "#ffffff" }],
+    stock: 45,
+    featured: true,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: "4",
+    name: "Track Joggers",
+    slug: "track-joggers",
+    description: "Tapered fit",
+    price: 229900,
+    images: [],
+    category: { id: "2", name: "Bottoms", slug: "bottoms" },
+    sizes: ["S", "M", "L", "XL"],
+    colors: [{ name: "Grey", hex: "#6b7280" }],
+    stock: 25,
+    featured: true,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="min-h-screen">
+      {/* HERO SECTION */}
+      <section className="relative h-screen flex items-center justify-center bg-gradient-to-br from-zinc-50 via-white to-zinc-100">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+        
+        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-7xl md:text-8xl font-bold tracking-tight mb-6"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            Train Hard.
+            <br />
+            <span className="bg-gradient-to-r from-zinc-900 via-zinc-700 to-zinc-900 bg-clip-text text-transparent">
+              Look Sharp.
+            </span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-xl md:text-2xl text-zinc-600 mb-12 max-w-2xl mx-auto"
+          >
+            Premium gym apparel designed for athletes who refuse to compromise.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex gap-4 justify-center"
+          >
+            <Link
+              href="/products"
+              className="group relative px-8 py-4 bg-zinc-900 text-white rounded-full font-medium overflow-hidden transition-all hover:scale-105"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                Shop Now
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </Link>
+
+            <Link
+              href="/collections"
+              className="px-8 py-4 border-2 border-zinc-900 text-zinc-900 rounded-full font-medium hover:bg-zinc-900 hover:text-white transition-all"
+            >
+              View Collections
+            </Link>
+          </motion.div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 1 }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2"
+        >
+          <div className="w-6 h-10 rounded-full border-2 border-zinc-400 flex justify-center p-2">
+            <motion.div
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="w-1.5 h-1.5 bg-zinc-400 rounded-full"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* FEATURED PRODUCTS */}
+      <section className="py-24 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-5xl font-bold mb-4"
+            >
+              Featured Collection
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-zinc-600"
+            >
+              Engineered for performance. Built to last.
+            </motion.p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {featuredProducts.map((product, index) => (
+              <ProductCard key={product.id} product={product} index={index} />
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link
+              href="/products"
+              className="inline-flex items-center gap-2 px-8 py-4 border-2 border-zinc-900 text-zinc-900 rounded-full font-medium hover:bg-zinc-900 hover:text-white transition-all"
+            >
+              View All Products
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }
